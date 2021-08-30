@@ -1,6 +1,7 @@
 import assert from 'assert';
 import type { Operation } from '../../../../ldp/operations/Operation';
 import { getLoggerFor } from '../../../../logging/LogUtil';
+import { BadRequestHttpError } from '../../../../util/errors/BadRequestHttpError';
 import { readJsonStream } from '../../../../util/StreamUtil';
 import type { AccountStore } from '../storage/AccountStore';
 import { InteractionHandler } from './InteractionHandler';
@@ -23,6 +24,10 @@ export class LoginHandler extends InteractionHandler {
     const { email, password, remember } = await this.parseInput(operation);
     // Try to log in, will error if email/password combination is invalid
     const webId = await this.accountStore.authenticate(email, password);
+    const settings = await this.accountStore.getSettings(webId);
+    if (!settings.useIdp) {
+      throw new BadRequestHttpError('This account is not registered for identification');
+    }
     this.logger.debug(`Logging in user ${email}`);
     return {
       type: 'complete',

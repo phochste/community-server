@@ -167,7 +167,6 @@ export * from './ldp/representation/RepresentationPreferences';
 export * from './ldp/representation/ResourceIdentifier';
 
 // LDP
-export * from './ldp/AuthenticatedLdpHandler';
 export * from './ldp/UnsecureWebSocketsProtocol';
 
 // Logging
@@ -210,14 +209,16 @@ export * from './pods/GeneratedPodManager';
 export * from './pods/PodManager';
 
 // Server
-export * from './server/BaseHttpHandler';
+export * from './server/AuthorizingHttpHandler';
 export * from './server/BaseHttpServerFactory';
 export * from './server/HttpHandler';
 export * from './server/HttpRequest';
 export * from './server/HttpResponse';
 export * from './server/HttpServerFactory';
-export * from './server/WebSocketServerFactory';
+export * from './server/OperationHttpHandler';
+export * from './server/ParsingHttpHandler';
 export * from './server/WebSocketHandler';
+export * from './server/WebSocketServerFactory';
 
 // Server/Middleware
 export * from './server/middleware/CorsHandler';

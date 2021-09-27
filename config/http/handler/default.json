@@ -20,6 +20,14 @@
           ]
         }
       ]
+    },
+    {
+      "comment": "Disable authorization for IDP components. This means everyone can register new pods.",
+      "@id": "urn:solid-server:default:IdentityProviderAuthorizingHandler",
+      "AuthorizingHttpHandler:_args_permissionReader": {
+        "@type": "AllStaticReader",
+        "allow": true
+      }
     }
   ]
 }
